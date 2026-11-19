@@ -7,5 +7,13 @@ import type { Ratt, Filter } from "./typer";
 //   annat         -> rätter vars kategori är lika med filter
 // Okänt filter ger en tom lista.
 export function filtreraMeny(meny: Ratt[], filter: Filter): Ratt[] {
-  // TODO
+  if (filter === "alla") {
+    return meny;
+  } else if (filter === "vegetarisk") {
+    return meny.filter(n => n.vegetarisk === true);
+  } else if (filter === "bakverk" || filter === "dryck" || filter === "lunch") {
+    return meny.filter(n => n.kategori === `${filter}`);
+  } else {
+    return [];
+  }
 }
