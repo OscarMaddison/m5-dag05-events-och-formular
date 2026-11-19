@@ -19,7 +19,12 @@ const filterGrupp = hamta("#filter");
 // 2. Lägg till handelse.preventDefault() i lyssnaren. Vad händer med länken?
 //    Ta bort preventDefault igen när du provat.
 // TODO
-
+const knapp = hamta("#hero .knapp");
+knapp.addEventListener?.("click", (handelse) => {
+  console.log("Klick!");
+  console.log(handelse.type);
+  console.log(handelse.target);
+})
 
 // DEL 2: filtret ----------------------------------------------------------
 // 3. Skriv funktionen uppdateraMeny(filter: Filter): void: hämta rätter med filtreraMeny, visa dem med visaMeny,
