@@ -25,8 +25,6 @@ export function kopplaFilter(grupp: HTMLElement, vidVal: (filter: Filter) => voi
     if (knappFilter) {
       vidVal(knapp?.dataset.filter as Filter);
     }
-    console.log(vidVal);
-    console.log(knapp?.dataset.filter);
   })
 }
 
@@ -34,5 +32,19 @@ export function kopplaFilter(grupp: HTMLElement, vidVal: (filter: Filter) => voi
 //    Vid klick på en sådan knapp: anropa vidLaggTill(id) där id är ett TAL (dataset ger text!).
 //    Klick på något annat ska inte göra något.
 export function kopplaLaggTill(container: HTMLElement, vidLaggTill: (id: number) => void): void {
-  // TODO
+  /*container.addEventListener("click", (handelse) => {
+    if (!(handelse.target instanceof HTMLElement)) {
+      return;
+    }
+    const knapp = handelse.target.closest<HTMLButtonElement>("button.lagg-i-order");
+    let knappId: string;
+    let knappIdTal: number;
+    if(knapp){
+      if(knapp.dataset.id){
+        knappId = knapp.dataset.id;
+        knappIdTal = parseInt(knappId);
+        vidLaggTill(knappIdTal);
+      }
+    }
+  })*/
 }

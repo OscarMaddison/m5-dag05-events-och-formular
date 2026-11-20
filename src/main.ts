@@ -31,7 +31,22 @@ knapp.addEventListener?.("click", (handelse) => {
 // 3. Skriv funktionen uppdateraMeny(filter: Filter): void: hämta rätter med filtreraMeny, visa dem med visaMeny,
 //    uppdatera rubriken och markera den billigaste lunchen som dagens rätt (om det finns någon lunch).
 // 4. Anropa uppdateraMeny("alla") direkt, och koppla filterknapparna med kopplaFilter.
-// TODO
+
+//3
+export function uppdateraMeny(filter: Filter): void {
+  const filterMeny = filtreraMeny(meny, filter);
+  visaMeny(lista, filterMeny);
+  const antalRatter = filterMeny.length;
+  uppdateraRubrik(rubrik, antalRatter);
+  if(filter === "alla" || filter === "vegetarisk" || filter === "lunch") {
+    const lunchFilter = filtreraMeny(filterMeny, "lunch");
+    const billigLunch = billigast(lunchFilter);
+    const dagensId = billigLunch?.id;
+    if(dagensId) {
+      markeraDagensRatt(lista, dagensId);
+    }
+  }
+}
 
 
 // DEL 3 (fördjupning): beställningen ---------------------------------------
