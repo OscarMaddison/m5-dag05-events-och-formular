@@ -48,6 +48,9 @@ export function uppdateraMeny(filter: Filter): void {
   }
 }
 
+//4
+uppdateraMeny("alla");
+kopplaFilter(filterGrupp, (f) => uppdateraMeny(f));
 
 // DEL 3 (fördjupning): beställningen ---------------------------------------
 // 5. let order: OrderRad[] = []; Koppla kopplaLaggTill(lista, ...) så att klick lägger till i order och visar den
