@@ -32,7 +32,7 @@ export function kopplaFilter(grupp: HTMLElement, vidVal: (filter: Filter) => voi
 //    Vid klick på en sådan knapp: anropa vidLaggTill(id) där id är ett TAL (dataset ger text!).
 //    Klick på något annat ska inte göra något.
 export function kopplaLaggTill(container: HTMLElement, vidLaggTill: (id: number) => void): void {
-  /*container.addEventListener("click", (handelse) => {
+  container.addEventListener("click", (handelse) => {
     if (!(handelse.target instanceof HTMLElement)) {
       return;
     }
@@ -46,5 +46,5 @@ export function kopplaLaggTill(container: HTMLElement, vidLaggTill: (id: number)
         vidLaggTill(knappIdTal);
       }
     }
-  })*/
+  })
 }
