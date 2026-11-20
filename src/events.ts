@@ -9,7 +9,25 @@ import type { Filter } from "./typer";
 //    Klick på något annat i gruppen ska inte göra något.
 //    Tips: handelse.target.closest('button[data-filter]')
 export function kopplaFilter(grupp: HTMLElement, vidVal: (filter: Filter) => void): void {
-  // TODO
+  grupp.addEventListener("click", (handelse) => {
+    if (!(handelse.target instanceof HTMLElement)) {
+      return;
+    }
+    for (const knappar of grupp.querySelectorAll<HTMLButtonElement>("button[data-filter]")) {
+      knappar.ariaPressed = "false";
+    }
+    const knapp = handelse.target.closest<HTMLButtonElement>("button[data-filter]");
+    if (knapp) {
+      knapp.ariaPressed = "true";
+    }
+    //let knappFilter = document.createElement("Filter");
+    const knappFilter = knapp?.dataset.filter;
+    if (knappFilter) {
+      vidVal(knapp?.dataset.filter as Filter);
+    }
+    console.log(vidVal);
+    console.log(knapp?.dataset.filter);
+  })
 }
 
 // 2. container innehåller kort med knappar: <button class="lagg-i-order" data-id="3">
