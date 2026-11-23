@@ -53,7 +53,55 @@ function visaFel(falt: Falt, meddelande: string): void {
 
 // 2. Koppla varje fält i regler: validera när användaren LÄMNAR fältet ("blur"),
 //    och validera på nytt vid "input" men bara om fältet redan är markerat som fel (aria-invalid="true").
-// TODO
+const namnFalt = hamta("#namn");
+namnFalt.addEventListener("blur", (handelse) => {
+  valideraNamn(namnFalt.textContent);
+})
+namnFalt.addEventListener("input", (handelse) => {
+  if (namnFalt.getAttribute("aria-invalid") === "true") {
+    valideraNamn(namnFalt.textContent);
+  }
+})
+
+const epostFalt = hamta("#epost");
+epostFalt.addEventListener("blur", (handelse) => {
+  valideraEpost(epostFalt.textContent);
+})
+epostFalt.addEventListener("input", (handelse) => {
+  if (epostFalt.getAttribute("aria-invalid") === "true") {
+    valideraEpost(epostFalt.textContent);
+  }
+})
+
+const telefonFalt = hamta("#telefon");
+telefonFalt.addEventListener("blur", (handelse) => {
+  valideraTelefon(telefonFalt.textContent);
+})
+telefonFalt.addEventListener("input", (handelse) => {
+  if (telefonFalt.getAttribute("aria-invalid") === "true") {
+    valideraTelefon(telefonFalt.textContent);
+  }
+})
+
+const datumFalt = hamta("#datum");
+datumFalt.addEventListener("blur", (handelse) => {
+  valideraDatum(datumFalt.textContent, dagensDatum());
+})
+datumFalt.addEventListener("input", (handelse) => {
+  if (datumFalt.getAttribute("aria-invalid") === "true") {
+    valideraDatum(datumFalt.textContent, dagensDatum());
+  }
+})
+
+const antalFalt = hamta("#antal");
+antalFalt.addEventListener("blur", (handelse) => {
+  valideraAntal(antalFalt.textContent);
+})
+antalFalt.addEventListener("input", (handelse) => {
+  if (antalFalt.getAttribute("aria-invalid") === "true") {
+    valideraAntal(antalFalt.textContent);
+  }
+})
 
 // 3. Vid "submit": preventDefault(). Validera hela formuläret med valideraFormular.
 //    - Finns fel: visa dem alla med visaFel, flytta fokus till första felaktiga fältet.
