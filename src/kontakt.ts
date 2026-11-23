@@ -109,4 +109,64 @@ antalFalt.addEventListener("input", (handelse) => {
 //    Tips: new FormData(form) ger fält av typen string | File. valideraFormular vill ha Record<string, string>,
 //    så loopa och ta bara värden där typeof varde === "string".
 //    Använd hittaFalt(namn) för att hämta ett fält med rätt typ.
-// TODO
+const formular: Record<string, string> = {};
+for (const element of form) {
+  if (typeof element.textContent === "string") {
+    formular[`${element.id}`] = `${element.textContent}`;
+  /*if (typeof element === "string") {
+    formular[`${element.id}`] = `${element}`;*/
+  }
+}
+
+const submitKnapp = hamta(".knapp");
+submitKnapp.addEventListener("submit", (handelse) => {
+  handelse.preventDefault();
+  const formularFel: Record<string, string> = valideraFormular(formular, dagensDatum());
+  let noError: boolean = true;
+  if (formularFel.namn) {
+    const namnFalt: Falt = hittaFalt("namn");
+    visaFel(namnFalt, formularFel.namn);
+    if (noError === true) {
+      namnFalt.focus();
+      noError = false;
+    }
+  }
+  if (formularFel.epost) {
+    const epostFalt: Falt = hittaFalt("epost");
+    visaFel(epostFalt, formularFel.epost);
+    if (noError === true) {
+      epostFalt.focus();
+      noError = false;
+    }
+  }
+  if (formularFel.telefon) {
+    const telefonFalt: Falt = hittaFalt("telefon");
+    visaFel(telefonFalt, formularFel.telefon);
+    if (noError === true) {
+      telefonFalt.focus();
+      noError = false;
+    }
+  }
+  if (formularFel.datum) {
+    const datumFalt: Falt = hittaFalt("datum");
+    visaFel(datumFalt, formularFel.datum);
+    if (noError === true) {
+      datumFalt.focus();
+      noError = false;
+    }
+  }
+  if (formularFel.antal) {
+    const antalFalt: Falt = hittaFalt("antal");
+    visaFel(antalFalt, formularFel.antal);
+    if (noError === true) {
+      antalFalt.focus();
+      noError = false;
+    }
+  }
+  if (noError === true) {
+    let bekraftelseMeddelande = document.createElement("p");
+    bekraftelseMeddelande.textContent = "Tack! Vi bekräftar din bokning inom ett dygn.";
+    bekraftelse.appendChild(bekraftelseMeddelande);
+    form.reset();
+  }
+})
