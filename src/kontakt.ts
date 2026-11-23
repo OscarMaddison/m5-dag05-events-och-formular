@@ -32,7 +32,23 @@ const regler: Record<string, (text: string) => string> = {
 //    - Är meddelandet tomt: ta bort aria-invalid och aria-describedby från fältet.
 //      Annars: falt.setAttribute("aria-invalid", "true") och aria-describedby = p:ts id.
 function visaFel(falt: Falt, meddelande: string): void {
-  // TODO
+  const namn: string = falt.name;
+  if (!(document.querySelector(`#${namn}-fel`))) {
+    const p = document.createElement("p");
+    p.classList.add("falt-fel");
+    p.id = `#${namn}-fel`;
+    falt.insertAdjacentElement("afterend", p);
+  }
+  const p = hamta(`#${namn}-fel`);
+  p.textContent = meddelande;
+  if (meddelande === "") {
+    falt.removeAttribute("aria-invalid");
+    falt.removeAttribute("aria-describedby");
+  } else {
+    falt.setAttribute("aria-invalid", "true");
+    falt.setAttribute("aria-describedby", p.id);
+  }
+
 }
 
 // 2. Koppla varje fält i regler: validera när användaren LÄMNAR fältet ("blur"),
