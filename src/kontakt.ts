@@ -109,14 +109,32 @@ antalFalt.addEventListener("input", (handelse) => {
 //    Tips: new FormData(form) ger fält av typen string | File. valideraFormular vill ha Record<string, string>,
 //    så loopa och ta bara värden där typeof varde === "string".
 //    Använd hittaFalt(namn) för att hämta ett fält med rätt typ.
+
+// Samla ihop alla fält i formuläret.
+// FormData hämtar varje fälts name och det användaren har skrivit.
+const data = new FormData(form);
+// DEBUG: visar innehållet i FormData (syns i F12 > Console)
+console.log("FormData:", Object.fromEntries(data));
+
+// Ett tomt objekt som vi fyller på, t.ex. { namn: "Anna", epost: "anna@mail.se" }
 const formular: Record<string, string> = {};
-for (const element of form) {
-  if (typeof element.textContent === "string") {
-    formular[`${element.id}`] = `${element.textContent}`;
-  /*if (typeof element === "string") {
-    formular[`${element.id}`] = `${element}`;*/
+
+// Gå igenom varje fält. Varje varv får vi fältets namn och dess värde.
+for (const [namn, varde] of data) {
+  // Värdet kan vara text eller en fil (från <input type="file">).
+  // valideraFormular vill bara ha text, så vi sparar bara strängar.
+  if (typeof varde === "string") {
+    formular[namn] = varde;
   }
 }
+// DEBUG: visar det som faktiskt skickas vidare
+console.log("formular:", formular);
+
+/*for (const element of form) {
+  if (typeof element.textContent === "string") {
+    formular[`${element.id}`] = `${element.textContent}`;
+  }
+}*/
 
 const submitKnapp = hamta(".knapp");
 submitKnapp.addEventListener("submit", (handelse) => {
